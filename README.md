@@ -167,5 +167,249 @@ IE 10
 + Configuramos el package.json
 
 ```javascript
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const path = require("path");
+
+/**@type {'webpack'}import().Configuration*/
+
+module.exports = {
+  mode: "production",
+  entry: "./src/index.js",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[contenthash].js",
+    publicPath: "",
+  },
+  target: "browserslist",
+  devServer: {
+    contentBase: "./dist",
+  },
+  module: {
+    rules: [
+      {
+        use: "babel-loader",
+        test: /\.js$/i,
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".js", ".json"],
+  },
+  plugins: [new CleanWebpackPlugin()],
+};
+
 ```
+
++Instalamos el plugin `npm i html-webpack-plugin -D`
+
+```javascript
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
+
+/**@type {'webpack'}import().Configuration*/
+
+module.exports = {
+  mode: "production",
+  entry: "./src/index.js",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[contenthash].js",
+    publicPath: "",
+  },
+  target: "browserslist",
+  devServer: {
+    contentBase: "./dist",
+  },
+  module: {
+    rules: [
+      {
+        use: "babel-loader",
+        test: /\.js$/i,
+        exclude: /node_modules/,
+      },
+      {
+        use: ["style-loader", "css-loader"],
+        test: /.css$/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".js", ".json"],
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+    }),
+  ],
+};
+
+```
+
+
+
+## 2 Agregamos estilos
+
++ Creamos en la carpeta public, una carpeta llamada img donde vamos a meter las imágenes del proyecto
+
+### 2.1 CSS, SASS y PostCSS
+
+#### Agregando CSS
+
++ Creamos  el archivo index.css
+  + index.css
++ Agregamos las dependencias a la terminal `npm i style-loader css-loader -D`
++ Añadimos la siguiente configuración a webpack
+
+```javascript
+   {
+       use: ["style-loader", "css-loader"],
+       test: /.css$/,
+    }
+```
+
+
+
+####  Agregando SASS
+
++ Cambiamos la extensión de nuestra hoja de estilos en css a scss index.scss
++ Instalamos las dependencias para sass `npm i -D sass sass-loader`
++ Agregamos la siguiente configuración
+
+```javascript
+
+      {
+        use: ["style-loader", "css-loader", "sass-loader"],
+        test: /.(css|sass|scss)$/,
+      },
+
+```
+#### Agregamos configuración para imágenes
+
+```javascript
+
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
+
+```
+
+##### EJEMPLO PRUEBA SCSS
+
+```scss
+
+body {
+  background: red;
+  color: white;
+
+  .foto__prueba {
+    width: 400px;
+    height: 400px;
+    background-image: url(../images/about.jpg);
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+```
+
++ importamos las imagenes a nuestro index.js
+
+```javascript
+
+import "./styles/index.scss";
+import "./images/home.jpg";
+
+```
+
+##### Agregando la hoja de estilo dinámica
+
++ Instalamos el plugin `npm install -D mini-css-extract-plugin`
+
+```javascript
+
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+//=========================================================
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
+//===========================================================
+const path = require("path");
+
+/**@type {'webpack'}import().Configuration*/
+
+module.exports = {
+  mode: "production",
+  entry: "./src/index.js",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[contenthash].js",
+    publicPath: "",
+  },
+  target: "browserslist",
+  devServer: {
+    contentBase: "./dist",
+  },
+  module: {
+    rules: [
+      {
+        use: "babel-loader",
+        test: /\.js$/i,
+        exclude: /node_modules/,
+      },
+      {
+      //========================================================
+        use: [MiniCSSExtractPlugin.loader, "css-loader", "sass-loader"],
+        test: /.(css|sass|scss)$/,
+      //=======================================================
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".js", ".json"],
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+    }),
+    //=======================
+    new MiniCSSExtractPlugin(),
+    //=========================
+  ],
+};
+
+```
+#### Agregamos postCSS
+
++ Instalamos dependencias `$ npm i -D postcss postcss-preset-env postcss-loader`
++ Agregamos un nuevo archivo llamado postcss.config.js
+
+```javascript
+
+
+module.exports = {
+    plugins: ["postcss-preset-env"],
+}
+
+```
+
+##### Agregamos el source maps
+
+````
+"scripts": {
+		"start": "webpack serve",
+		"build": "webpack --mode production --devtool source-map",
+		"dev": "webpack --mode development",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+````
+
+
 

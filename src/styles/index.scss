@@ -1,0 +1,12 @@
+body {
+  background: red;
+  color: white;
+
+  .foto__prueba {
+    width: 400px;
+    height: 400px;
+    background-image: url(../images/about.jpg);
+    background-position: center;
+    background-size: cover;
+  }
+}
