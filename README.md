@@ -21,7 +21,7 @@
 
 - Empezamos en una nueva rama llamada main
 
-### 1.2 Iniciamos proyecto
+### 1.2 Instalamos dependencias
 ####  Iniciamos webpack
 - `npm init -y`
 - `npm i -D webpack webpack-cli webpack-dev-server`
@@ -73,4 +73,99 @@
 	+ index.html
 + src [ ARCHIVOS DE DESARROLLO  ]
 	+ index.js [ En este archivo va a ir todo nuestro js que vamos a compilar ]
-	+ hi.js  [ Archivo de prueba ] 	
+	+ hi.js  [ Archivo de prueba ] 
+
+### 1.5 webpack.config.js
++ Añadimos el archivo webpack.config.js
+
+```javascript
+
+const path = require("path");
+
+/**@type {'webpack'}import().Configuration*/
+
+module.exports = {
+    mode: "production",
+    entry: "./src/index.js",
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        filename: "[name].[contenthash].js",
+        publicPath: ""
+    },
+
+    devServer: {
+        contentBase: "./dist",
+    },
+};
+
+```
+### 1.6 Instalamos babel
+
++ `npm i -D babel-loader @babel/core @babel/preset-env`
++ Configuramos webpack.config.js
+
+```javascript
+
+const path = require("path");
+
+/**@type {'webpack'}import().Configuration*/
+
+module.exports = {
+  mode: "production",
+  entry: "./src/index.js",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[contenthash].js",
+    publicPath: "",
+  },
+  target: "browserslist",
+  devServer: {
+    contentBase: "./dist",
+  },
+  module: {
+    rules: [
+      {
+        use: "babel-loader",
+        test: /\.js$/i,
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".js", ".json"],
+  },
+};
+
+```
+
++ Creamos babel.config.json
+
+```javascript
+{
+	"presets": [ "@babel/preset-env" ]
+}
+
+```
+
++ Añadimos los polifils `npm i core-js`
++ Añadimos el arcgivo .browserslistrc
+
+```
+last 2 versions
+> 0.5%
+IE 10
+
+```
+
++ Construimos nuestro proyecto `npm run build`
+
+
+
+### 1.7 Instalamos plugin de limpieza
+
++ Instalamos `  npm i clean-webpack-plugin -D`
++ Configuramos el package.json
+
+```javascript
+```
+
