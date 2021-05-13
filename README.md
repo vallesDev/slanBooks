@@ -21,12 +21,56 @@
 
 - Empezamos en una nueva rama llamada main
 
-## 2 Webpack
-
-### 2.1 Iniciamos proyecto
-
+### 1.2 Iniciamos proyecto
+####  Iniciamos webpack
 - `npm init -y`
 - `npm i -D webpack webpack-cli webpack-dev-server`
 - `code .` [ Con este copmando abrimos el editor de codigo ]
 - Creamos el archivo .gitignore
-	+ 	
+	+ Añadimos al .gitignore
+		+ 	node_modules
+		+ 	README.md
+		+ 	package-lock.json
+
+### 1.3 Primera configuración de package.json
+
+```javascript
+
+{
+  "name": "slanBook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "webpack serve",
+		"build": "webpack --mode production",
+		"dev": "webpack --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vallesDev/slanBooks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vallesDev/slanBooks/issues"
+  },
+  "homepage": "https://github.com/vallesDev/slanBooks#readme",
+  "devDependencies": {
+    "webpack": "^5.37.0",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
+
+```
+### 1.4 Añadimos carpetas y archivos
+
++ Public [Donde se va a publicar nuestra web]
+	+ index.html
++ src [ ARCHIVOS DE DESARROLLO  ]
+	+ index.js [ En este archivo va a ir todo nuestro js que vamos a compilar ]
+	+ hi.js  [ Archivo de prueba ] 	
