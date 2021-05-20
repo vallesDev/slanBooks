@@ -14,6 +14,12 @@ module.exports = {
     publicPath: "",
   },
   target: "browserslist",
+  devtool: "source-map",
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+  },
   devServer: {
     contentBase: "./dist",
   },

@@ -1,12 +1,11 @@
-body {
-  background: red;
-  color: white;
-
-  .foto__prueba {
-    width: 400px;
-    height: 400px;
-    background-image: url(../images/about.jpg);
-    background-position: center;
-    background-size: cover;
-  }
-}
+@use 'variables';
+@use 'global';
+@use 'layout';
+@use 'header';
+@use 'scrolltop';
+@use 'home';
+@use 'about';
+@use 'services';
+@use 'project-in-mind';
+@use 'portfolio';
+@use 'restocss';

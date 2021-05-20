@@ -1,0 +1,28 @@
+@use 'variables';
+
+/*PROJECT IN MIND*/
+
+.project__container {
+  padding: 1.5rem 1rem;
+  background-color: var(--first-color-dark);
+  color: var(--first-color-lighten);
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.project__icon,
+.project__title {
+  margin-bottom: var(--mb-1);
+}
+
+.project__icon {
+  font-size: 3.5rem;
+}
+
+.project__title {
+  font-size: 1.5rem;
+}
+
+.project__description {
+  margin-bottom: var(--mb-4);
+}
