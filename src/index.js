@@ -15,33 +15,28 @@ import "./images/testimonial3.jpg";
 import "./js/scripts.js";
 import Swiper from "swiper/bundle";
 import "swiper/swiper-bundle.css";
-
 mixitup(".portfolio__container");
 
 /*==== CARRUSEL ====*/
 
-const swiper = new Swiper(".testimonial__container", {
-  // Optional parameters
-  spaceBetween: 30,
+const mySwiper = new Swiper(".testimonial__container", {
+  spaceBetween: 16,
   loop: true,
   grabCursor: true,
-  // If we need pagination
   pagination: {
     el: ".swiper-pagination",
-    type: "bullets",
+    clickable: true,
   },
   breakpoints: {
     640: {
-      slidesPerWiew: 2,
+      slidesPerView: 2,
     },
     1024: {
-      slidesPerWiew: 2,
+      slidesPerView: 3,
     },
   },
 });
 
-swiper();
+mySwiper();
 
-//import "./js/mixitupPagination.js";
-
-//mixitup.use(mixitupPagination);
+/*=== GSAP ANIMATION ===*/

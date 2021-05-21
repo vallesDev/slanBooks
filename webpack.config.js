@@ -15,11 +15,6 @@ module.exports = {
   },
   target: "browserslist",
   devtool: "source-map",
-  optimization: {
-    splitChunks: {
-      chunks: "all",
-    },
-  },
   devServer: {
     contentBase: "./dist",
   },
@@ -35,7 +30,7 @@ module.exports = {
         test: /.(css|sass|scss)$/,
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|webP)$/i,
         type: "asset/resource",
       },
     ],
