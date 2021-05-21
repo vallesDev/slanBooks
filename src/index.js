@@ -15,7 +15,10 @@ import "./images/testimonial3.jpg";
 import "./js/scripts.js";
 import Swiper from "swiper/bundle";
 import "swiper/swiper-bundle.css";
+import "./js/animate.js";
+import animate from "./js/animate.js";
 mixitup(".portfolio__container");
+animate();
 
 /*==== CARRUSEL ====*/
 
@@ -38,5 +41,3 @@ const mySwiper = new Swiper(".testimonial__container", {
 });
 
 mySwiper();
-
-/*=== GSAP ANIMATION ===*/
